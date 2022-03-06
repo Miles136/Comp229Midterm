@@ -19,6 +19,8 @@ if(getTitle == "Movie List")
             var movieId = button.getAttribute("data-id");
             console.log(movieId);
 
+            var http = require('http');
+            var MongoClient = require('mongodb').MongoClient;
             var url = "mongodb.com/v2/6223d1793f968577fa111fc9#metrics/replicaSet/6223d28a9780ed75722291d4/explorer/myFirstDatabase";
 
             MongoClient.connect(url, function(err, db) {

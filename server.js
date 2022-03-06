@@ -7,7 +7,6 @@
 var app = require('./config/app');
 var debug = require('debug')('comp229midterm:server');
 var http = require('http');
-var MongoClient = require("mongodb").MongoClient;
 
 /**
  * Get port from environment and store in Express.
