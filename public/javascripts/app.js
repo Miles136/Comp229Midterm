@@ -4,22 +4,35 @@
 
 console.log('Goes to the client side.');
 
+if(getTitle == "Movie List")
+{
+    let deleteButtons = document.querySelectorAll('.btn-danger');
+        
+    for(button of deleteButtons)
+    {
+        button.addEventListener('click', (event)=>{
+            if(!confirm("Are you sure?")) 
+            {
+                event.preventDefault();
+            }
 
-if (window.location.pathname == "/movie/list") {
-  $ondelete = $(".table tbody td a.delete");
-  $ondelete.click(function () {
-    var id = $(this).attr("data-id");
-    console.log(id);
-    var request = {
-      url: "https://milesmidterm.herokuapp.com/movie/delete/${id}",
-      method: "DELETE"
-    };
+            var movieId = button.attr(data-id);
+            console.log(movieId);
 
-    if (confirm("Remove this movie from the list?")) {
-      $.ajax(request).done(function (response) {
-        alert("Data Deleted Successfully!");
-        location.reload();
-      });
+            var http = require('http');
+            var MongoClient = require('mongodb').MongoClient;
+            var url = "mongodb.com/v2/6223d1793f968577fa111fc9#metrics/replicaSet/6223d28a9780ed75722291d4/explorer/myFirstDatabase";
+
+            MongoClient.connect(url, function(err, db) {
+              if (err) throw err;
+              var myquery = { id: movieId };
+              db.collection("movies").remove(myquery, function(err, obj) {
+                if (err) throw err;
+                console.log(obj.result.n + " document(s) deleted");
+                db.close();
+              });
+            }); 
+			
+        });
     }
-  });
 }
