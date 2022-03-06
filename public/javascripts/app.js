@@ -1,3 +1,7 @@
+// File Name: app.js
+// Author's Name: Nicanor Emilio Manuel Montoya
+// Student ID: 301247391
+
 console.log('Goes to the client side.');
 
 if (window.location.pathname == "/movie/list") {

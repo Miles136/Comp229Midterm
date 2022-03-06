@@ -44,7 +44,7 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = (req, res, next) => {
   // ADD YOUR CODE HERE
   if (!req.body) {
-    res.status(400).send({ message: "Content can not be emtpy!" });
+    res.status(400).send({ message: "Error processing movie addition" });
     return;
   }
   const movies = new Movie({
@@ -60,11 +60,7 @@ module.exports.processAddPage = (req, res, next) => {
       res.redirect("/movie/list");
     })
     .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Some error occurred while creating a create operation",
-      });
+      res.status(500).send({ message: "Error processing movie addition" });
     });
 };
 
@@ -76,7 +72,7 @@ module.exports.displayEditPage = (req, res, next) => {
   Movie.findById(id)
     .then((movies) => {
       if (!movies) {
-        res.status(404).send({ message: "Not found movies with id " + id });
+        res.status(404).send({ message: "Error rendering Edit form" });
       } else {
         res.render("movie/add_edit", {
           title: "Edit Movie",
@@ -85,9 +81,7 @@ module.exports.displayEditPage = (req, res, next) => {
       }
     })
     .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving movies with id " + id });
+      res.status(500).send({ message: "Error rendering Edit form" });
     });
 };
 
@@ -95,39 +89,35 @@ module.exports.displayEditPage = (req, res, next) => {
 module.exports.processEditPage = (req, res, next) => {
   // ADD YOUR CODE HERE
   if (!req.body) {
-    return res.status(400).send({ message: "Data to update can not be empty" });
+    return res.status(400).send({ message: "Error processing update information" });
   }
   const id = req.params.id;
   Movie.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
-        res.status(404).send({
-          message: `Cannot Update movie with ${id}. Maybe movie not found!`,
-        });
+        res.status(404).send({ message: "Error processing update information" });
       } else {
         if (!req.body) {
           return res
             .status(400)
-            .send({ message: "Data to update can not be empty" });
+            .send({ message: "Error processing update information" });
         }
         const id = req.params.id;
         Movie.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
           .then((data) => {
             if (!data) {
-              res.status(404).send({
-                message: `Cannot Update movie with ${id}. Maybe movie not found!`,
-              });
+              res.status(404).send({ message: "Error processing update information" });
             } else {
               res.redirect("/movie/list");
             }
           })
           .catch((err) => {
-            res.status(500).send({ message: "Error Update movie information" });
+            res.status(500).send({ message: "Error processing update information" });
           });
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error Update movie information" });
+      res.status(500).send({ message: "Error processing update information" });
     });
 };
 
@@ -139,18 +129,12 @@ module.exports.performDelete = (req, res, next) => {
   Movie.findByIdAndDelete(id)
     .then((data) => {
       if (!data) {
-        res
-          .status(404)
-          .send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` });
+        res.status(404).send({ message: "Error deleting movie" });
       } else {
-        res.send({
-          message: "Movie is deleted successfully!",
-        });
+        res.send({ message: "Movie is deleted successfully!" });
       }
     })
     .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete Movie with id=" + id,
-      });
+      res.status(500).send({ message: "Error deleting movie" });
     });
 };
