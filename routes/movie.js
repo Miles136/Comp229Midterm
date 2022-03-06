@@ -14,7 +14,7 @@ router.get('/edit/:id', movieController.displayEditPage);
 router.post('/edit/:id', movieController.processEditPage);
 
 // Router for Delete function
-router.delete('/delete/:id', movieController.performDelete);
+router.get('/delete/:id', movieController.performDelete);
 
 // Routers for Add functions
 router.get('/add', movieController.displayAddPage);
