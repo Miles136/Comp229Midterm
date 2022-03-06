@@ -3,7 +3,7 @@
 // Student ID: 301247391
 
 console.log('Goes to the client side.');
-
+var MongoClient = require( 'mongodb' ).MongoClient;
 
 
 if (window.location.pathname == "/movie/list") {
@@ -11,7 +11,6 @@ if (window.location.pathname == "/movie/list") {
   $ondelete.click(function () {
     var movieid = $(this).attr("data-id");
     console.log(movieid);
-    var MongoClient = require( 'mongodb' ).MongoClient;
     var url = "milesmidterm.herokuapp.com/movie/delete/";
 
     MongoClient.connect( url , function( err , db ) {
