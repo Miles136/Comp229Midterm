@@ -16,7 +16,7 @@ if(getTitle == "Movie List")
                 event.preventDefault();
             }
 
-            var movieId = button.attr(data-id);
+            var movieId = button.attr("data-id");
             console.log(movieId);
 
             var http = require('http');
