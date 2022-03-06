@@ -9,7 +9,8 @@ if(getTitle == "Movie List")
         button.addEventListener('click', (event)=>{
             var id = $(this).attr("data-id");
             var request = {
-              url: `https://vikasdave-midterm.herokuapp.com/movie/delete/${id}`,
+              // Change URL
+              url: `https://FIXTHIS.herokuapp.com/movie/delete/${id}`,
               method: "DELETE",
             };
         
